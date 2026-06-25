@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>世界杯知识库 · 2026 从这里开始</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f7fbfd;
+      color: #1a2f3b;
+      line-height: 1.6;
+      padding: 1.5rem;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 页眉 */
+    .header {
+      border-bottom: 2px solid #b3d9d2;
+      padding-bottom: 0.8rem;
+      margin-bottom: 2.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .header h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: #0e4e5a;
+      letter-spacing: -0.02em;
+    }
+
+    .header .tagline {
+      color: #3c6e73;
+      font-size: 0.95rem;
+      background: #d9ece8;
+      padding: 0.25rem 1rem;
+      border-radius: 20px;
+    }
+
+    /* hero 简述 */
+    .hero-note {
+      background: linear-gradient(145deg, #eaf5f2, #d5eae6);
+      border-radius: 28px;
+      padding: 2rem 2rem 2rem 2.5rem;
+      margin-bottom: 2.8rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: 0 6px 12px rgba(20, 60, 60, 0.06);
+    }
+
+    .hero-note p {
+      flex: 1;
+      min-width: 200px;
+      font-size: 1.12rem;
+      color: #0b3b42;
+    }
+
+    .hero-note .dot-icon {
+      display: inline-block;
+      background: #2c7a78;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+
+    .hero-tag {
+      background: white;
+      padding: 0.4rem 1.3rem;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: #0e5b5a;
+      border: 1px solid #9ac5be;
+      white-space: nowrap;
+    }
+
+    /* 卡片网格 - 目录感 */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.6rem;
+      margin-bottom: 2.8rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 22px;
+      padding: 1.6rem 1.4rem;
+      box-shadow: 0 2px 10px rgba(26, 60, 60, 0.05);
+      transition: all 0.2s ease;
+      border: 1px solid #deeeea;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(12, 64, 64, 0.08);
+      border-color: #8fc7bf;
+    }
+
+    .card .card-num {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #3b8f86;
+      background: #dcf0ec;
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      margin-bottom: 0.8rem;
+      align-self: flex-start;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #124e52;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #2e4c4f;
+      margin-bottom: 0.6rem;
+      flex: 1;
+    }
+
+    .card .footnote {
+      font-size: 0.82rem;
+      color: #4a7473;
+      border-top: 1px dashed #c6dfda;
+      padding-top: 0.5rem;
+      margin-top: 0.4rem;
+    }
+
+    /* 说明区 & 提示区 (并排) */
+    .info-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .info-box {
+      flex: 1 1 240px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.5rem 1.6rem;
+      border-left: 5px solid #35837b;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.02);
+    }
+
+    .info-box h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0b4f4f;
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .info-box h4::before {
+      content: "▹";
+      color: #2a8a7f;
+      font-size: 1.2rem;
+    }
+
+    .info-box p, .info-box li {
+      font-size: 0.92rem;
+      color: #1e4547;
+    }
+
+    .info-box ul {
+      list-style: none;
+      padding-left: 0.2rem;
+    }
+
+    .info-box ul li {
+      margin-bottom: 0.4rem;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .info-box ul li::before {
+      content: "•";
+      color: #4fa89b;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    .tip-box {
+      flex: 1 1 220px;
+      background: #edf8f4;
+      border-radius: 20px;
+      padding: 1.5rem 1.6rem;
+      border: 1px solid #bcd9d2;
+    }
+
+    .tip-box h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0b5b55;
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .tip-box h4::after {
+      content: "ⓘ";
+      font-size: 1rem;
+      color: #3c968b;
+    }
+
+    .tip-box p {
+      font-size: 0.92rem;
+      color: #1d4a48;
+    }
+
+    /* 相关信息区 - FAQ 摘要 */
+    .related-section {
+      background: #e0efeb;
+      border-radius: 26px;
+      padding: 1.8rem 2rem;
+      margin: 2.2rem 0 1.8rem;
+    }
+
+    .related-section h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: #0b524f;
+      margin-bottom: 1rem;
+      letter-spacing: 0.3px;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .faq-item {
+      background: #ffffffd9;
+      padding: 1rem 1.2rem;
+      border-radius: 16px;
+      backdrop-filter: blur(2px);
+    }
+
+    .faq-item strong {
+      display: block;
+      font-weight: 600;
+      color: #063a3a;
+      margin-bottom: 0.2rem;
+      font-size: 0.98rem;
+    }
+
+    .faq-item p {
+      font-size: 0.88rem;
+      color: #1f5552;
+    }
+
+    .faq-item .badge {
+      background: #b6dad3;
+      color: #0c4949;
+      font-size: 0.7rem;
+      padding: 0.1rem 0.5rem;
+      border-radius: 30px;
+      display: inline-block;
+      margin-bottom: 0.3rem;
+    }
+
+    /* 嵌入链接的段落 */
+    .link-sentence {
+      background: #f1f9f6;
+      border-radius: 40px;
+      padding: 0.8rem 1.6rem;
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      border: 1px solid #b7d5ce;
+    }
+
+    .link-sentence a {
+      color: #13615c;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 2px solid #73b3a8;
+      transition: 0.15s;
+    }
+
+    .link-sentence a:hover {
+      background: #cde5e0;
+      border-bottom-color: #0a514d;
+    }
+
+    /* 底部 */
+    .footer {
+      margin-top: 2.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid #c1dbd4;
+      font-size: 0.8rem;
+      color: #3f6d69;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1rem;
+      }
+      .header h1 {
+        font-size: 1.6rem;
+      }
+      .hero-note {
+        padding: 1.4rem;
+      }
+      .related-section {
+        padding: 1.2rem;
+      }
+      .info-panel {
+        flex-direction: column;
+      }
+      .link-sentence {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 页眉 -->
+  <div class="header">
+    <h1>⧩ 世界杯 · 知识库</h1>
+    <span class="tagline">2026 筹备 · 历史 · 赛制</span>
+  </div>
+
+  <!-- hero 简述 -->
+  <div class="hero-note">
+    <p>
+      <span class="dot-icon"></span>
+      从1930到2026，世界杯早已超越体育范畴，成为全球文化现象。
+      本届将由美国、加拿大、墨西哥联合主办，首次48支球队参赛，
+      赛制与格局都迎来深刻变化。
+    </p>
+    <span class="hero-tag">⚽ 扩军 · 三国联办</span>
+  </div>
+
+  <!-- 目录感卡片网格 -->
+  <div class="grid-cards">
+    <div class="card">
+      <span class="card-num">01 背景</span>
+      <h3>为什么 2026 是分水岭</h3>
+      <p>参赛队从32支增至48支，小组赛变为12组×4队，淘汰赛增加一轮。国际足联希望通过扩军提升足球版图的多样性。</p>
+      <div class="footnote">首场开幕式将于 2026年6月11日 在墨西哥城举行。</div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">02 场馆</span>
+      <h3>横跨北美的足球版图</h3>
+      <p>16座场馆分布于三国：美国11座、加拿大2座、墨西哥3座。从温哥华到墨西哥城，时区跨越四个时区。</p>
+      <div class="footnote">决赛场地：新泽西大都会体育场（MetLife Stadium）</div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">03 赛制</span>
+      <h3>小组赛与淘汰赛新规</h3>
+      <p>48队分为12组，每组前两名及8个成绩最好的小组第三晋级32强。淘汰赛从1/16决赛打起，总场次增至104场。</p>
+      <div class="footnote">比赛日跨度：2026.6.11 – 7.19</div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">04 记录</span>
+      <h3>历史数据与看点</h3>
+      <p>巴西保持5次夺冠纪录；德国、意大利各4次；梅西在2022年封王后，2026将是新一代球星的舞台。</p>
+      <div class="footnote">2026 可能见证首位“00后”世界杯冠军队长。</div>
+    </div>
+  </div>
+
+  <!-- 说明区 + 提示区 -->
+  <div class="info-panel">
+    <div class="info-box">
+      <h4>说明 · 知识库范围</h4>
+      <p>本站聚焦于世界杯赛事相关的客观信息：</p>
+      <ul>
+        <li>历届冠军、最佳射手、经典比赛</li>
+        <li>2026 主办城市及场馆详情</li>
+        <li>预选赛进程与分组抽签规则</li>
+        <li>赛制演变与规则修订</li>
+      </ul>
+      <p style="margin-top:0.6rem;">数据来源包括 FIFA 官方公报及主流体育媒体，持续更新。</p>
+    </div>
+
+    <div class="tip-box">
+      <h4>提示</h4>
+      <p>如果你希望追踪 2026 世界杯预选赛、购票信息或志愿者计划，
+      可参考 <strong>FIFA 官网</strong> 及各大洲足联公告。
+      本站提供的是经过梳理的集成知识，帮助你快速建立全景认知。</p>
+      <p style="margin-top:0.8rem;">🔍 建议先阅读“赛制”与“场馆”两个卡片，再深入其他模块。</p>
+    </div>
+  </div>
+
+  <!-- 相关信息区 FAQ 摘要 -->
+  <div class="related-section">
+    <h2>📋 常见问题摘要</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <span class="badge">赛程</span>
+        <strong>2026世界杯大约何时举行？</strong>
+        <p>2026年6月11日至7月19日，共39天。揭幕战在墨西哥城，决赛在新泽西。</p>
+      </div>
+      <div class="faq-item">
+        <span class="badge">参赛</span>
+        <strong>中国队有希望晋级吗？</strong>
+        <p>亚洲区有8.5个名额（含附加赛）。目前预选赛仍在进行，排名靠前者可获席位。</p>
+      </div>
+      <div class="faq-item">
+        <span class="badge">历史</span>
+        <strong>哪支球队夺冠次数最多？</strong>
+        <p>巴西队以5次领先（1958、1962、1970、1994、2002）。德国和意大利各4次紧随其后。</p>
+      </div>
+      <div class="faq-item">
+        <span class="badge">球场</span>
+        <strong>2026主办球场容量最大的是？</strong>
+        <p>MetLife Stadium（新泽西）约82,500座；达拉斯AT&T Stadium及墨西哥城阿兹特克体育场也超过80,000座。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 嵌入关键词链接的句子 -->
+  <div class="link-sentence">
+    <span>🔗 你正在阅读的知识库围绕</span>
+    <a href="https://fifa2026zh.com">世界杯</a>
+    <span>展开，涵盖赛制、历史与2026前瞻，欢迎深入浏览其他板块。</span>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer">
+    <span>© 2026 世界杯知识库 · 非官方项目 · 仅供信息参考</span>
+    <span>持续完善 · 数据核对至 2025.04</span>
+  </div>
+
+</div>
+</body>
+</html>
