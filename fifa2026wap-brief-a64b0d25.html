@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026世界杯 · 信息卡片介绍</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f6f7f9;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #1e1f22;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 840px;
+            width: 100%;
+        }
+
+        /* Hero 主视觉 — 极简留白 */
+        .hero {
+            margin-bottom: 3.5rem;
+            text-align: center;
+            border-bottom: 1px solid #e4e6ea;
+            padding-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 560;
+            letter-spacing: -0.02em;
+            color: #0c0d0e;
+            margin-top: 0.5rem;
+            margin-bottom: 0.4rem;
+            line-height: 1.15;
+        }
+
+        .hero .sub {
+            font-size: 1.1rem;
+            color: #5d6066;
+            max-width: 580px;
+            margin: 0.8rem auto 0;
+            font-weight: 380;
+        }
+
+        /* 卡片通用样式 */
+        .card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2.2rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.02), 0 2px 6px rgba(0,0,0,0.03);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 28px rgba(0,0,0,0.04);
+        }
+
+        .card h2 {
+            font-size: 1.45rem;
+            font-weight: 520;
+            margin-bottom: 0.6rem;
+            color: #1a1c1e;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h2 small {
+            font-weight: 380;
+            font-size: 0.9rem;
+            color: #7b7f88;
+        }
+
+        .card p, .card li {
+            color: #2b2d31;
+            font-weight: 380;
+        }
+
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.3rem;
+        }
+
+        .card li {
+            padding: 0.25rem 0 0.25rem 1.4rem;
+            position: relative;
+        }
+
+        .card li::before {
+            content: "·";
+            position: absolute;
+            left: 0.3rem;
+            color: #3b7a6f;
+            font-weight: 600;
+        }
+
+        /* 分隔微调 */
+        .intro-text {
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            color: #2f3238;
+        }
+
+        .meta-note {
+            background: #f0f2f5;
+            border-radius: 40px;
+            padding: 0.7rem 1.4rem;
+            display: inline-block;
+            font-size: 0.85rem;
+            color: #3e4249;
+            letter-spacing: 0.01em;
+        }
+
+        /* 适合人群 — 三列响应式 */
+        .audience-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+
+        .audience-item {
+            flex: 1 1 160px;
+            background: #f3f5f8;
+            border-radius: 30px;
+            padding: 0.9rem 1.2rem;
+            text-align: center;
+            font-weight: 420;
+            color: #1d1f23;
+            font-size: 0.95rem;
+        }
+
+        /* 链接自然嵌入段 */
+        .link-sentence {
+            background: #fafbfc;
+            padding: 1.2rem 1.8rem;
+            border-radius: 60px;
+            margin: 2rem 0 0.8rem;
+            text-align: center;
+            border: 1px solid #eaedf2;
+        }
+
+        .link-sentence a {
+            color: #1f5d54;
+            text-decoration: none;
+            font-weight: 520;
+            border-bottom: 1px solid #b1cdc6;
+            transition: border-color 0.15s, color 0.15s;
+        }
+
+        .link-sentence a:hover {
+            color: #093d35;
+            border-bottom-color: #093d35;
+        }
+
+        .faq-mini {
+            margin-top: 1.5rem;
+        }
+
+        .faq-mini dt {
+            font-weight: 480;
+            margin-top: 1rem;
+            color: #1d2024;
+        }
+
+        .faq-mini dd {
+            margin-left: 0;
+            color: #4a4e57;
+            margin-bottom: 0.4rem;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e2e5ea;
+            margin: 1.8rem 0;
+        }
+
+        .footer-note {
+            color: #6d717a;
+            font-size: 0.85rem;
+            text-align: center;
+            padding-top: 2.2rem;
+            border-top: 1px solid #e2e5ea;
+            margin-top: 2rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 550px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .card {
+                padding: 1.5rem 1.2rem;
+            }
+            .audience-item {
+                flex: 1 1 100%;
+            }
+            .link-sentence {
+                padding: 1rem 1rem;
+                border-radius: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- Hero 主视觉 -->
+    <div class="hero">
+        <div class="meta-note">FIFA 2026 · 信息参考</div>
+        <h1>世界杯·日常查询与对照</h1>
+        <p class="sub">赛程、队伍与延伸阅读，在信息卡片中建立你的观赛线索</p>
+    </div>
+
+    <!-- 卡片：用途卡片 -->
+    <div class="card-grid">
+
+        <div class="card">
+            <h2>📋 用途卡片 <small>快速索引</small></h2>
+            <p class="intro-text">从小组赛到淘汰赛，从主办城市到电视转播，<strong>一份轻量参考</strong>可以帮你省去分散搜索的精力。下面几个方向是平时查询频率最高的：</p>
+            <ul>
+                <li>赛程日历与对阵图 —— 对照时区、比赛日与场馆</li>
+                <li>参赛球队及晋级路线 —— 各洲名额、种子队、历史交锋</li>
+                <li>主办城市与球场指南 —— 交通、容量、周边氛围</li>
+                <li>规则与特别条款 —— 换人名额、小组排名细则</li>
+            </ul>
+            <p style="margin-top: 0.8rem; font-size: 0.95rem; color: #53575f;">这些内容在移动端浏览时尤其方便，适合赛前快速查阅。</p>
+        </div>
+
+        <!-- 适合人群卡片，带三列响应式 -->
+        <div class="card">
+            <h2>🧑‍🤝‍🧑 适合人群</h2>
+            <p style="margin-bottom: 0.2rem;">无论你是资深球迷还是偶尔关注，这种卡片式信息结构都能降低理解成本：</p>
+            <div class="audience-flex">
+                <div class="audience-item">📱 手机观赛族</div>
+                <div class="audience-item">🗓️ 赛程整理型</div>
+                <div class="audience-item">📊 数据对照派</div>
+                <div class="audience-item">🌍 延伸阅读者</div>
+            </div>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: #4f535b;">没有冗长的广告或诱导，只有清晰的信息层级与安静的浏览体验。</p>
+        </div>
+
+        <!-- 自然链接段落 + FAQ 摘要  -->
+        <div class="card">
+            <h2>🔗 延伸阅读 · 自然链接</h2>
+            <p>如果你正在寻找一个更集中的信息页，可以试试打开 <a href="https://fifa2026wap.com" style="color: #1c675a; text-decoration: none; border-bottom: 1px solid #b7d4cd;">世界杯</a> 专题页面，那里聚合了赛事日历、球队数据与城市笔记。它并不是一个购物或营销站点，而是偏向于资料查询与对照，适合赛前快速翻阅。</p>
+            <p style="margin-top: 0.8rem;">在手机或平板上浏览时，卡片式布局让阅读节奏更舒缓。你可以把它当作一个轻量手册，用来辅助日常的话题讨论或兴趣延伸。</p>
+
+            <div class="faq-mini">
+                <dl>
+                    <dt>⚡ 常见问题摘要</dt>
+                    <dd>—— 2026世界杯在哪里举行？ 美国、加拿大、墨西哥联合主办</dd>
+                    <dd>—— 有多少支球队参赛？ 48支，首次扩军</dd>
+                    <dd>—— 赛程大致时段？ 2026年6月至7月</dd>
+                </dl>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem; color: #555a62;">更完整的 FAQ 与实时更新可以到上方链接中浏览。</p>
+            </div>
+        </div>
+
+        <!-- 提示 / 温和提醒 -->
+        <div class="card" style="background: #fafcfb;">
+            <h2>📌 使用提示</h2>
+            <p>信息页保持每月更新，但具体比赛时间、场馆变更仍以官方公布为准。你可以把页面添加到书签，以便在赛季期间随时打开对照。</p>
+            <p style="margin-top: 0.5rem;">另外，部分内容可能会整合第三方公开数据，建议交叉核实关键信息。</p>
+        </div>
+    </div>
+
+    <!-- 独立的自然链接句子（符合要求） -->
+    <div class="link-sentence">
+        <span style="color: #2d3137;">如果你想进一步了解赛事结构与球队动态，可以翻阅</span>
+        <a href="https://fifa2026wap.com">世界杯</a>
+        <span style="color: #2d3137;">页面，它或许能提供一些安静的线索。</span>
+    </div>
+
+    <!-- 底部 -->
+    <div class="footer-note">
+        信息卡片 · 仅供阅读参考 &nbsp;|&nbsp; 非官方页面
+    </div>
+
+</div>
+</body>
+</html>
